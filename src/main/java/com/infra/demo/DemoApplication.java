@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
@@ -20,17 +21,15 @@ public class DemoApplication {
     }
 
     public static void main(String[] args){
-		LinkedList<String> strings = new LinkedList<>();
-		HashMap<String, LinkedList<String>> stringLinkedListHashMap = new HashMap<>();
+		HashMap map = new HashMap();
+		addDataInMap(map);
+		System.out.println(map.size());//guess the output is java call by value or call by reference :O
+	}
 
-		strings.add("12121212121212");
-		strings.add("demid");
-
-		stringLinkedListHashMap.put("demo",strings);
-		System.out.println(stringLinkedListHashMap);
-		strings.clear();
-
-
+	public static void addDataInMap(Map<String,String> map){
+    	map = new HashMap<>();
+    	map.put("demo","demo");
+		System.out.println(map.size());
 	}
 
 }
