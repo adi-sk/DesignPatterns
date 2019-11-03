@@ -11,9 +11,12 @@ public class DemoOCPMain {
                                                 new Product("bike",Color.YELLOW,Size.SMALL));
 
         ProductFilter pf = new ProductFilter();
-        pf.filter(products,new SizeSpecification(Size.SMALL))
+
+        // here you can create as many specification(filters) you want without changing much code
+        // OPEN for extension CLOSED for Modification :)
+        pf.FinalFilter(products,new SizeSpecification(Size.SMALL),new ColorSpecification(Color.YELLOW))
                 .forEach(product -> {
-                    System.out.println("- " + product.getName() + " is " + Size.SMALL.name());
+                    System.out.println("- " + product.getName() + " is " + Size.SMALL.name() + " And " + Color.YELLOW );
                 });
 
     }
@@ -71,6 +74,10 @@ interface AwesomeFilter<T>{
     Stream<T> filter(List<T> items,Specification<T> spec);
 }
 
+interface UltimateFilter<T>{
+    Stream<T> FinalFilter(List<T> items, Specification<T> ... specs);
+}
+
 class ColorSpecification implements Specification<Product>{
     private Color color;
 
@@ -95,11 +102,24 @@ class SizeSpecification implements Specification<Product>{
     }
 }
 
-class ProductFilter implements AwesomeFilter<Product>{
+class ProductFilter implements AwesomeFilter<Product>,UltimateFilter<Product>{
 
     @Override
     public Stream<Product> filter(List<Product> items, Specification<Product> spec) {
         return items.stream().filter(p -> spec.isSatisfied(p));
+    }
+
+    @Override
+    public Stream<Product> FinalFilter(List<Product> items, Specification<Product> ...specs) {
+        return items.stream().filter(product -> {
+            boolean isAllsatisfied = true;
+            for (Specification<Product> spec : specs){
+                if (!spec.isSatisfied(product)){
+                    isAllsatisfied = false;
+                }
+            }
+            return isAllsatisfied;
+        });
     }
 }
 
