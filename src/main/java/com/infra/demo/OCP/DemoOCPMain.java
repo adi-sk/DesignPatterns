@@ -112,13 +112,13 @@ class ProductFilter implements AwesomeFilter<Product>,UltimateFilter<Product>{
     @Override
     public Stream<Product> FinalFilter(List<Product> items, Specification<Product> ...specs) {
         return items.stream().filter(product -> {
-            boolean isAllsatisfied = true;
+
             for (Specification<Product> spec : specs){
                 if (!spec.isSatisfied(product)){
-                    isAllsatisfied = false;
+                    return false;
                 }
             }
-            return isAllsatisfied;
+            return true;
         });
     }
 }
