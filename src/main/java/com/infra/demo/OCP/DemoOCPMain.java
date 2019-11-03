@@ -14,9 +14,9 @@ public class DemoOCPMain {
 
         // here you can create as many specification(filters) you want without changing much code
         // OPEN for extension CLOSED for Modification :)
-        pf.FinalFilter(products,new SizeSpecification(Size.SMALL),new ColorSpecification(Color.YELLOW))
+        pf.FinalFilter(products,new SizeSpecification(Size.SMALL),new ColorSpecification(Color.RED))
                 .forEach(product -> {
-                    System.out.println("- " + product.getName() + " is " + Size.SMALL.name() + " And " + Color.YELLOW );
+                    System.out.println("- " + product.getName() + " is " + Size.SMALL.name() + " And " + Color.RED );
                 });
 
     }
