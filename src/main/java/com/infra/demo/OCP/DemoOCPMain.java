@@ -14,9 +14,14 @@ public class DemoOCPMain {
 
         // here you can create as many specification(filters) you want without changing much code
         // OPEN for extension CLOSED for Modification :)
-        pf.FinalFilter(products,new SizeSpecification(Size.SMALL),new ColorSpecification(Color.RED))
+        pf.FinalFilterAnd(products,new SizeSpecification(Size.SMALL),new SizeSpecification(Size.LARGE))
                 .forEach(product -> {
                     System.out.println("- " + product.getName() + " is " + Size.SMALL.name() + " And " + Color.RED );
+                });
+
+        pf.FinalFilterOr(products,new SizeSpecification(Size.SMALL),new SizeSpecification(Size.MEDIUM))
+                .forEach(product -> {
+                    System.out.println("- " + product.getName() + " is " + Size.SMALL.name() + " Or " + Size.MEDIUM.name() );
                 });
 
     }
@@ -75,7 +80,9 @@ interface AwesomeFilter<T>{
 }
 
 interface UltimateFilter<T>{
-    Stream<T> FinalFilter(List<T> items, Specification<T> ... specs);
+    Stream<T> FinalFilterAnd(List<T> items, Specification<T> ... specs);
+
+    Stream<T> FinalFilterOr(List<T> items, Specification<T> ... specs);
 }
 
 class ColorSpecification implements Specification<Product>{
@@ -110,7 +117,7 @@ class ProductFilter implements AwesomeFilter<Product>,UltimateFilter<Product>{
     }
 
     @Override
-    public Stream<Product> FinalFilter(List<Product> items, Specification<Product> ...specs) {
+    public Stream<Product> FinalFilterAnd(List<Product> items, Specification<Product> ...specs) {
         return items.stream().filter(product -> {
 
             for (Specification<Product> spec : specs){
@@ -119,6 +126,19 @@ class ProductFilter implements AwesomeFilter<Product>,UltimateFilter<Product>{
                 }
             }
             return true;
+        });
+    }
+
+    @Override
+    public Stream<Product> FinalFilterOr(List<Product> items, Specification<Product>... specs) {
+        return items.stream().filter(product -> {
+
+            for (Specification<Product> spec : specs){
+                if (spec.isSatisfied(product)){
+                    return true;
+                }
+            }
+            return false;
         });
     }
 }
