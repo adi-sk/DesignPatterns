@@ -1,4 +1,4 @@
-package com.infra.demo.builder;
+package com.infra.demo.builder.fluent;
 
 public class FluentBuilderDemo {
     public static void main(String[] args) {
