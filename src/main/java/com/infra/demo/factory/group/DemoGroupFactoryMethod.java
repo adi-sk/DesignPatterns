@@ -15,7 +15,7 @@ class Point {
         this.y = y;
     }
 
-   public static class PointFactory{
+   public static class PointFactory{ // we can use this nested factory method as well s normal class to achieve the same but then we need to make construcor public
        public static Point newCartesianPoint(double x, double y) {
            return new Point(x, y);
        }
