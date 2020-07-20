@@ -30,6 +30,8 @@ public class SerializationProblem {
 
         BasicSingletonProb instance2 = readFormFile("demo2.bin");
 
+        System.out.println(instance == instance2);
+
         System.out.println(instance);
         System.out.println(instance2);
 
@@ -78,7 +80,7 @@ class BasicSingletonProb implements Serializable {
     }
 
     /* here, if we do not add this method then the jvm deserialization will create new object of this instance
-        so we have to tell reolver to always return static obect INSTANCE to maintain singleton nature.
+        so we have to tell resolver to always return static obect INSTANCE to maintain singleton nature.
     * */
     protected Object readResolve(){
         return INSTANCE;
