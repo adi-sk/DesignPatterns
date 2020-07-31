@@ -50,7 +50,7 @@ class RasterRenderer implements Renderer{
     }
 }
 
-// this abstact works as a bridge between shapes and renderers.
+// this abstract works as a bridge between shapes and renderers.
 abstract class Shape{
     Renderer renderer;
     public Shape(Renderer renderer) {
