@@ -92,9 +92,9 @@ class Square extends Shape{
         super(renderer);
     }
 
-    public Square(Renderer renderer,float radius) {
+    public Square(Renderer renderer,float side) {
         super(renderer);
-        this.side = radius;
+        this.side = side;
     }
 
     @Override
