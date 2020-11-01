@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 @SpringBootApplication
