@@ -25,7 +25,7 @@ public class DynamicProxy
 	public static void main(String[] args)
 	{
 		Person person = new Person();
-		Human human = withLogging(person, Human.class);
+		Human human = DynamicProxy.<Human>withLogging(person, Human.class);
 		human.walk();
 		human.talk();
 		human.walk();

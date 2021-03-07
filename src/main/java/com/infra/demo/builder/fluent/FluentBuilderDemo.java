@@ -2,9 +2,9 @@ package com.infra.demo.builder.fluent;
 
 public class FluentBuilderDemo {
     public static void main(String[] args) {
-        PersonBuilder personBuilder = new PersonBuilder();
+        /*PersonBuilder personBuilder = new PersonBuilder();
         Person aditya = personBuilder.withName("Aditya").withAge(23).build();
-        System.out.println(aditya);
+        System.out.println(aditya);*/
 
         EmployeeBuilder employeeBuilder = new EmployeeBuilder();
         Person aditya2 = employeeBuilder.withName("Aditya").withAge(23).withProfession("DEV").build();
